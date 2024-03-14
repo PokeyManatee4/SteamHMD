@@ -1,0 +1,10 @@
+{
+	"alwaysActivate": true,
+	"name" : "SteamHMD",
+	"directory" : "",
+	"resourceOnly" : false,
+	"hmd_presence" :
+	[
+		"*.*"
+	]
+}
