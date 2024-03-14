@@ -56,7 +56,7 @@ find_library(OPENVR_LIBRARIES
 set(OPENVR_INCLUDE_DIR ${OPENVR_LIB_DIR}/headers)
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/output/drivers")
-add_library(${DRIVER_NAME} SHARED
+add_library(steamhmd SHARED
         src/hmd_driver_factory.cpp
         src/device_provider.h
         src/device_provider.cpp
@@ -65,14 +65,14 @@ add_library(${DRIVER_NAME} SHARED
         )
 
 # This is so we can build directly to "<binary_dir>/<target_name>/<platform>/<arch>/<driver_name>.<dll/so>"
-set_target_properties(SteamHMD PROPERTIES RUNTIME_OUTPUT_DIRECTORY $<1:${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${TARGET_NAME}/bin/${ARCH_TARGET}>)
+set_target_properties(steamhmd PROPERTIES RUNTIME_OUTPUT_DIRECTORY $<1:${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${TARGET_NAME}/bin/${ARCH_TARGET}>)
 
-target_link_libraries(SteamHMD PRIVATE ${OPENVR_LIBRARIES} util_driverlog util_vrmath)
-target_include_directories(SteamHMD PRIVATE ${OPENVR_INCLUDE_DIR})
+target_link_libraries(steamhmd PRIVATE ${OPENVR_LIBRARIES} util_driverlog util_vrmath)
+target_include_directories(steamhmd PRIVATE ${OPENVR_INCLUDE_DIR})
 
 # Copy driver assets to output folder
 add_custom_command(
-        TARGET SteamHMD
+        TARGET steamhmd
         PRE_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy_directory
         ${CMAKE_CURRENT_SOURCE_DIR}/SteamHMD
